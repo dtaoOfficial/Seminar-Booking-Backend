@@ -101,4 +101,22 @@ public class BookingRequestController {
     }
 
 
+    // ✅ Get requests by Email + Department (Dept Panel)
+    @GetMapping("/user")
+    public ResponseEntity<List<BookingRequest>> getByEmailAndDepartment(
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) String department
+    ) {
+        if (email != null && department != null) {
+            return ResponseEntity.ok(service.getByEmailAndDepartment(email, department));
+        } else if (email != null) {
+            return ResponseEntity.ok(service.getByEmail(email));
+        } else if (department != null) {
+            return ResponseEntity.ok(service.getByDepartment(department));
+        } else {
+            return ResponseEntity.ok(service.getAll());
+        }
+    }
+
+
 }

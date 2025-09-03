@@ -35,9 +35,11 @@ public class SeminarService {
     }
 
     // ✅ Get by hall & date
-    public List<Seminar> getByHallAndDate(String hallName, String date) {
+    // SeminarService.java
+    public List<Seminar> getByHallAndDate(String date, String hallName) {
         return seminarRepository.findByDateAndHallName(date, hallName);
     }
+
 
     // ✅ Full update
     public Seminar updateSeminar(String id, Seminar updatedSeminar) {
@@ -60,4 +62,13 @@ public class SeminarService {
     public void deleteSeminar(String id) {
         seminarRepository.deleteById(id);
     }
+
+
+    // SeminarService.java
+    public List<Seminar> getByDepartmentAndEmail(String department, String email) {
+        return seminarRepository.findByDepartmentAndEmail(department, email);
+    }
+
+
+
 }

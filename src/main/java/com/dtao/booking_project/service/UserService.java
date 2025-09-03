@@ -92,6 +92,13 @@ public class UserService {
     }
 
     // -------------------------
+    // ➕ Get user by Email
+    // -------------------------
+    public Optional<User> getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    // -------------------------
     // Delete user
     // -------------------------
     public void deleteUser(String id) {

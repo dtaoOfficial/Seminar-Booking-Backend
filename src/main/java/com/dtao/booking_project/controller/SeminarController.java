@@ -39,12 +39,16 @@ public class SeminarController {
     }
 
     // ✅ Get seminars by hall & date
+    // SeminarController.java
     @GetMapping("/hall/{hallName}/date/{date}")
-    public ResponseEntity<List<Seminar>> getByHallAndDate(@PathVariable String hallName, @PathVariable String date) {
-        return ResponseEntity.ok(seminarService.getByHallAndDate(hallName, date));
+    public ResponseEntity<List<Seminar>> getByHallAndDate(
+            @PathVariable String hallName,
+            @PathVariable String date) {
+        return ResponseEntity.ok(seminarService.getByHallAndDate(date, hallName));
     }
 
-    // ✅ Full update
+
+    // ✅ Update seminar
     @PutMapping("/{id}")
     public ResponseEntity<Seminar> updateSeminar(
             @PathVariable String id,
@@ -58,5 +62,13 @@ public class SeminarController {
     public ResponseEntity<Void> deleteSeminar(@PathVariable String id) {
         seminarService.deleteSeminar(id);
         return ResponseEntity.noContent().build();
+    }
+
+    // ✅ Dept History (filter by department + email)
+    @GetMapping("/history")
+    public ResponseEntity<List<Seminar>> getHistory(
+            @RequestParam String department,
+            @RequestParam String email) {
+        return ResponseEntity.ok(seminarService.getByDepartmentAndEmail(department, email));
     }
 }

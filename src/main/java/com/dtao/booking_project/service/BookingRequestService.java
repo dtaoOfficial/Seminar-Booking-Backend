@@ -101,11 +101,13 @@ public class BookingRequestService {
         }
 
         // Create Seminar (confirmed booking)
+        // inside approve(String requestId)
         Seminar seminar = new Seminar();
         seminar.setHallName(req.getHallName());
         seminar.setSlot(req.getSlot());
         seminar.setSlotTitle(req.getSlotTitle());
         seminar.setBookingName(req.getBookingName());
+        seminar.setEmail(req.getEmail());   // ✅ now stored
         seminar.setDepartment(req.getDepartment());
         seminar.setPhone(req.getPhone());
         seminar.setDate(req.getDate());
@@ -114,6 +116,7 @@ public class BookingRequestService {
         seminar.setStatus("APPROVED");
 
         seminarRepository.save(seminar);
+
 
         // Update request status
         req.setStatus("APPROVED");
@@ -160,6 +163,10 @@ public class BookingRequestService {
 
     public List<BookingRequest> getByEmailAndDateRange(String email, String startDate, String endDate) {
         return bookingRequestRepository.findByEmailAndDateBetween(email, startDate, endDate);
+    }
+
+    public List<BookingRequest> getByEmailAndDepartment(String email, String department) {
+        return bookingRequestRepository.findByEmailAndDepartment(email, department);
     }
 
 }
